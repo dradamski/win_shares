@@ -1,19 +1,18 @@
 # Purpose of this is to scrape winshare data from basketball-reference.com
 
 from bs4 import BeautifulSoup
-import urllib.request
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+import urllib.request       # Determine whether urllib, urllib2, or requests is best option
 
+
+# Access Basketball Reference to get league leaders in win shares for each season
 #specify the url
 site = "https://www.basketball-reference.com/leaders/ws_top_10.html"
 #Query the website and return the html to the variable 'page'
 page = urllib.request.urlopen(site)
 #Parse the html in the 'page' variable and store it in Beautiful Soup format
 soup = BeautifulSoup(page)
-
-#Found data location by using print(soup.prettify()) and searching for the data.
-
 table = soup.table
 
 # accesses table with year, player, winshares and puts info into a single list of strings.
@@ -21,10 +20,10 @@ raw_list = []
 for string in table.stripped_strings:
     if string != '*':    #removes hall of fame denotation
         raw_list.append(string)
-raw_list = raw_list[13:]   #removes unneccessary info
+raw_list = raw_list[13:]   #removes unneccessary labeling info
 
 
-# create list with years, league, top 10 leaders in win shares, player page links, win shares, player team, team wins
+# create list with years, league, top 10 leaders in win shares, player page links, win shares
 years = []
 for i in raw_list:
     x = 0
@@ -56,6 +55,13 @@ win_shares = []
 for num in raw_list:
     if num[0] == "(":
         win_shares.append(float(num[1:-1]))
+
+
+        
+        
+# Create list of UNIQUE PLAYERS
+
+
 
 
 
