@@ -59,10 +59,35 @@ for num in raw_list:
 
         
         
-# Create list of UNIQUE PLAYERS
+# Create list of UNIQUE PLAYER dictionaries with player as key and list of indices in players list
+# NOT SURE IF I SHOULD DO IT STRAIGHT UP OR USE FUNCTIONS
+unique_li = []
+unique_dic = []
+for ind in players:
+    if ind not in unique_li:
+        unique_li.append(ind)
+for player in unique_li:
+    p = {}
+    p[player] = [x for x in range(len(players)) if players[x] == player]
+    unique_dic.append(p)
 
-
-
+    
+# FUNCITON VERSION
+def unique_li(player_list):
+    unique = []
+    full_unique = []
+    
+    for ind in players:
+        if ind not in unique:
+            unique.append(ind)
+    
+    for player in unique:
+        play_dic = {}
+        play_dic[player] = [x for x in range(len(players)) \
+                            if players[x] == player \
+                            ]
+        full_unique.append(play_dic)
+    return full_unique
 
 
 # use year to pull team info from player page
